@@ -38,11 +38,11 @@ validator.try(req.body, {
 
 ##### Writing the Rules w/ Arguments
 
-Rules are defined as an object with string keys that correspond to the expected input, as we saw above. The values should be an array of validators to run. If you want to call the validator without any arguments, you can simply pass it as a string in this validators array. If you want to pass arguments to the validators, you may do it like so:
+Rules are defined as an object with string keys that correspond to the expected input, as we saw above. The values should be an array of validators to run, like so:
 
 ```js
 {
-    // This will run `required()`
+    // This will effectively run `required()`
     a: [ 'required' ],
     // This will run `between(4, 6)`
     b: [ 'between: 4, 6' ],
@@ -61,9 +61,9 @@ The results object will always define the following properties:
 
  * `passed: Boolean` True if the validation rules passed, false otherwise.
  * `failed: Boolean` True if the validation rules failed, false otherwise.
- * `errors: Object` An object where keys are properties that had rules which failed (that is, values that are OK will not be included) and values are an array of strings of error messages, according to the Lang.
+ * `errors: Object` An object where keys are properties that had rules which failed (that is, values that are OK will not be included) and values are an array of strings of error messages, according to the Language.
 
-Additionally, we pass through the following lodash methods on the errors object that can be used to work with the errors object: `keys`, `values`, `pairs`, `invert`, `pick`, `omit`, `forIn`, `has`.
+Additionally, we pass through the following lodash methods on the results  that can be used to work with the errors object: `keys`, `values`, `pairs`, `invert`, `pick`, `omit`, `forIn`, `has`.
 
 #### Adding Custom Validators
 
@@ -71,17 +71,30 @@ Custom validators may be defined on the validation instance. For example, if we 
 
 ```js
 validator.validators.add(function isFoo (key, value, times) {
-    return value === Array(times + 1).join('foo') === value;
+    return value === Array(times + 1).join('foo');
 });
-// Make sure fooBlerg is "foofoofoo"
+// Make sure fooBlerg is present and equal to "foofoofoo"
 validator.try(req.body, { fooBlerg: ['required', 'isFoo: 3'] });
 ```
 
 We pull the function name if you pass in a named function, but alternately you can define rules by passing in the name as the first argument: `validation.add('foo', function () { ... })`.
 
-The function always recieves two arguments, the key and value under validation, then is passed any arguments given in the ruleset. It is executed in the context of the input (`this` will be `req.body`, the case of the example) with the `$validator` property set to the validation instance.
+Your custom function always recieves at least two arguments, the key and value under validation, then is passed any arguments given in the ruleset. It is executed in the context of the input (`this` will be `req.body`, the case of the example) with the `$validator` property set to the validation instance. For example:
 
-It can either return a boolean indicating a success status **or** return a promise that is resolved to a boolean true/false.
+```js
+validator.validators.add(function spy (key, value, name, target) {
+    console.log(this); // => { foo: 'bar' }
+    console.log(key); // => 'foo'
+    console.log(value); // => 'var'
+    console.log(name); // => 'James Bond'
+    console.log(target); // => 'Mr. Goldfinger'
+    return true;
+});
+// Make sure fooBlerg is present and equal to "foofoofoo"
+validator.try({ foo: 'bar' }, { foo: ['spy: James Bond, Mr. Goldfinger'] });
+```
+
+It should either return a boolean indicating a success status **or** return a promise that is resolved to a boolean true/false.
 
 #### Built-in Rules
 
@@ -136,15 +149,13 @@ We build on the excellent foundation of [chriso/validator.js](https://github.com
 
 #### Language
 
-Error messages are generated from language files. Currently we only have a English set, `en`. (although you can contribute translations! You can load an entirely new set
+Error messages are generated from language files. Currently we only have a English set, `en`. (although you can contribute translations!) You can load an entirely new set:
 
 ```js
 validator.language.set(__dirname + '/klingon.json');
 // or, pass in directly
 validator.language.set({ 'required': 'Y U NO GIVE US <%= key %>' });
 ```
-
-> Note: care should be taken to use the escaped value syntax (`<%= something %>`) to prevent potential XSS.
 
 Or you can extend and overwrite it -- especially helpful when making custom rules.
 
@@ -157,6 +168,8 @@ validator.language.extend({
     'isBar': 'Need moar bar.'
 );
 ```
+
+> Note: care should be taken to use the escaped value syntax (`<%= something %>`) to prevent potential XSS.
 
 The markup for languages, as you can see, is fairly simple, using [Lodash's template functionality](https://lodash.com/docs#template). You can also define "global" variables to be made accessible in these templates:
 ```js
