@@ -4,6 +4,25 @@
 
 A module for simple and fun validation in Node.js.
 
+### Quick Example
+
+```js
+var validator = require('artisan-validator')();
+var rules {
+    username: ['required', 'between: 4, 30', 'alphanumeric'],
+    password: ['required', 'longer: 5'],
+    acceptTOS: ['required', 'boolean: true']
+};
+
+validator.try(req.body, rules).then(function (result) {
+    if (result.passed) {
+        res.json(400, result.errors);
+    } else {
+        registerAccount();
+    }
+});
+```
+
 ### Usage
 
 #### Making the Validator
@@ -27,7 +46,7 @@ validator.try(req.body, {
     // Instead of 'between: 4, 30' we could alternately write ['between', 4, 30]
     password: ['required', 'not: contain: password']
 }).then(function (result) {
-    if (result.passed) {
+    if (result.failed) {
         res.json(400, result.errors);
         // -> {"username": ["Username be alphanumeric."]}
     } else {
@@ -53,7 +72,7 @@ Rules are defined as an object with string keys that correspond to the expected 
 }
 ```
 
-> Note: when working with the string-based shorthand, we try to cast numbers correctly, but that's the only thing we do. If you need precise control your validator's input types, use the array notation.
+> Note: when working with the string-based shorthand, we try to types numbers correctly, but that's not very precise. If you need precise control your validator's input types, use the array notation.
 
 ##### Working with the Results object
 

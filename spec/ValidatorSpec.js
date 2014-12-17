@@ -18,9 +18,9 @@ describe('the main validator', function () {
     });
 
     it('should fulfill rules', function () {
-        var rules = { a: ['foo: 1, 2, a: b'], b: ['required', ['foo', 1, '2']]};
+        var rules = { a: ['foo: 1, 2, a: b, true'], b: ['required', ['foo', 1, '2']]};
         validator.fulfillRules(rules);
-        expect(rules).toEqual({ a: [['foo', 1, 2, 'a: b']], b: [['required'], ['foo', 1, '2']]});
+        expect(rules).toEqual({ a: [['foo', 1, 2, 'a: b', true]], b: [['required'], ['foo', 1, '2']]});
     });
 
     describe('try()', function () {
