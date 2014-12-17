@@ -9,14 +9,14 @@ A module for simple and fun validation in Node.js.
 
 ```js
 var validator = require('artisan-validator')();
-var rules {
+var rules = {
     username: ['required', 'between: 4, 30', 'alphanumeric'],
     password: ['required', 'longer: 5'],
     acceptTOS: ['required', 'boolean: true']
 };
 
 validator.try(req.body, rules).then(function (result) {
-    if (result.passed) {
+    if (result.failed) {
         res.json(400, result.errors);
     } else {
         registerAccount();
