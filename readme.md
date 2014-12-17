@@ -83,10 +83,10 @@ Your custom function always recieves at least two arguments, the key and value u
 
 ```js
 validator.validators.add(function spy (key, value, name, target) {
-    console.log(this); // => { foo: 'bar' }
-    console.log(key); // => 'foo'
-    console.log(value); // => 'var'
-    console.log(name); // => 'James Bond'
+    console.log(this);   // => { foo: 'bar' }
+    console.log(key);    // => 'foo'
+    console.log(value);  // => 'bar'
+    console.log(name);   // => 'James Bond'
     console.log(target); // => 'Mr. Goldfinger'
     return true;
 });
