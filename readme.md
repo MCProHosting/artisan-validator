@@ -12,8 +12,6 @@ First we have to "check out" a validator instance to use later. That's easy enou
 var validator = require('artisan-validator')();
 ```
 
-> Note: several processes involved in the instantiation of validators are synchronous. In your application, you'd want to create a single validator instance (to which you can add custom rules or language extensions) and reuse that throughout the system.
-
 #### Validating an Object
 
 **All validations are asynchronous** and return promises. Although there are not any built-in asynchonous validations, you may very well want to add a custom rule that, for examples, checks to make sure a value does not already exist in the database.
