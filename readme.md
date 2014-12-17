@@ -73,7 +73,7 @@ Rules are defined as an object with string keys that correspond to the expected 
 }
 ```
 
-> Note: when working with the string-based shorthand, we try to types numbers correctly, but that's not very precise. If you need precise control your validator's input types, use the array notation.
+> Note: when working with the string-based shorthand, we try to typecase correctly, but that's its not 100% magical. If you need more precise control your validator's input types, use the array notation.
 
 ##### Working with the Results object
 
