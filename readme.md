@@ -211,6 +211,8 @@ validator.language.extend({
 
 > Note: care should be taken to use the escaped value syntax (`<%= something %>`) to prevent potential XSS.
 
+The markup for languages, as you can see, is fairly simple, using [Lodash's template functionality](https://lodash.com/docs#template).
+
 Keys for language entries should match up with the corresponding rule, or be a `$missing` catch-all language. We make the following variables available in the template:
 
  * `key` - Key of the value that has failed.
@@ -218,8 +220,7 @@ Keys for language entries should match up with the corresponding rule, or be a `
  * `args` - Array of the arguments passed to the validator that failed.
  * Any global variables (see below)
 
-
-The markup for languages, as you can see, is fairly simple, using [Lodash's template functionality](https://lodash.com/docs#template). You can also define "global" variables to be made accessible in these templates:
+You can define "global" variables to be made accessible in these templates:
 
 ```js
 validator.language.global('meaningOfLife', 42);
