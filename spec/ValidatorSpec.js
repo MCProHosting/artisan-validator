@@ -7,20 +7,45 @@ describe('the main validator', function () {
         validator = new Validator();
     });
 
-    it('should extract required', function () {
-        var data = { a: 1, b: 2, c: null, d: undefined };
-        var rules = { b: [['required']], c: [['required']], d: [] };
-        var response = { addError: jasmine.createSpy('addError') };
-        var out = validator.extractRequired(response, data, rules);
-
-        expect(out).toEqual({ b: 2 });
-        expect(response.addError).toHaveBeenCalledWith('c', 0);
-    });
-
     it('should fulfill rules', function () {
         var rules = { a: ['foo: 1, 2, a: b, true'], b: ['required', ['foo', 1, '2']]};
         validator.fulfillRules(rules);
         expect(rules).toEqual({ a: [['foo', 1, 2, 'a: b', true]], b: [['required'], ['foo', 1, '2']]});
+    });
+
+    describe('extractRequired', function () {
+
+        it('should work with required', function () {
+            var data = { a: 1, b: 2, c: null, d: undefined };
+            var rules = { b: [['required']], c: [['required']], d: [] };
+            var response = { addError: jasmine.createSpy('addError') };
+            validator.extractRequired(response, data, rules);
+
+            expect(rules).toEqual({ b: []});
+            expect(response.addError).toHaveBeenCalledWith('c', 0);
+        });
+
+        it('should work with requiredWith', function () {
+            var data = { a: 1, b: null, c: undefined };
+            var rules = { b: [['requiredWith', 'a']], c: [['requiredWith', 'b']] };
+            var response = { addError: jasmine.createSpy('addError') };
+            validator.extractRequired(response, data, rules);
+
+            expect(rules).toEqual({ });
+            expect(response.addError).toHaveBeenCalledWith('b', 0);
+            expect(response.addError).not.toHaveBeenCalledWith('c', 0);
+        });
+
+        it('should work with requiredWithout', function () {
+            var data = { a: 1, b: null, c: undefined };
+            var rules = { b: [['requiredWithout', 'a']], c: [['requiredWithout', 'c']] };
+            var response = { addError: jasmine.createSpy('addError') };
+            validator.extractRequired(response, data, rules);
+
+            expect(rules).toEqual({ });
+            expect(response.addError).not.toHaveBeenCalledWith('b', 0);
+            expect(response.addError).toHaveBeenCalledWith('c', 0);
+        });
     });
 
     describe('try()', function () {

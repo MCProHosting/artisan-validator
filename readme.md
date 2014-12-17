@@ -120,6 +120,15 @@ It should either return a boolean indicating a success status **or** return a pr
 
 We build on the excellent foundation of [chriso/validator.js](https://github.com/chriso/validator.js) and define some of our own rules as well.
 
+##### Generic
+
+ * `equals(comparison)` - check if the value matches the comparison. is capable of doing a deep comparison between objects/arrays, via [assert.deepEquals](http://nodejs.org/api/assert.html#assert_assert_deepequal_actual_expected_message)
+ * `in(values...)` - check if the value is in a array of allowed values. Warning: it's recommended to use array notation for this rule, unless all the values are strings and are not padded with spaces..
+ * `not(str...)` - inverts the given rule. for example: `[ 'not', 'length', 5 ]` will pass whenever the length is *not* 5
+ * **★** `required()` - check that the value is present (not null and not undefined). **if required is not passed, no validation rules will be run for values that aren't present**
+ * `requiredWith(key)` - ensure that the value is present if another "key" is also present.
+ * `requiredWithout(key)` - ensure that the value is present if another "key" is not present.
+
 ##### Types
  * `array()` - check if the value is an array.
  * `boolean([value])` - Whether the value is a boolean. If a value is passed, we check that the boolean equals that value.
@@ -168,13 +177,6 @@ We build on the excellent foundation of [chriso/validator.js](https://github.com
  * `greaterThan(min)` - check if the value is a number and is greater than an amount
  * `lessThan(max)` - check if the value is a number and is less than an amount.
  * `within(min, max)` - check if the value is a number within a range, exclusive.
-
-##### Generic
-
- * `equals(comparison)` - check if the value matches the comparison. is capable of doing a deep comparison between objects/arrays, via [assert.deepEquals](http://nodejs.org/api/assert.html#assert_assert_deepequal_actual_expected_message)
- * `in(values...)` - check if the value is in a array of allowed values. Warning: it's recommended to use array notation for this rule, unless all the values are strings and are not padded with spaces..
- * `not(str...)` - inverts the given rule. for example: `[ 'not', 'length', 5 ]` will pass whenever the length is *not* 5
- * **★** `required()` - check that the value is present (not null and not undefined). **if required is not passed, no validation rules will be run for values that aren't present**
 
 #### Language
 
