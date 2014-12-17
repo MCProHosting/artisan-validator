@@ -146,8 +146,6 @@ We build on the excellent foundation of [chriso/validator.js](https://github.com
  * `creditCard()` - check if the value is a credit card.
  * `email()` - check if the value is an email.
  * `FQDN([options])` - check if the value is a fully qualified domain name (e.g. domain.com). options is an object which defaults to { require_tld: true, allow_underscores: false }.
- * `fullWidth()` - check if the value contains any full-width chars.
- * `halfWidth()` - check if the value contains any half-width chars.
  * `hexadecimal()` - check if the value is a hexadecimal number.
  * `hexColor()` - check if the value is a hexadecimal color.
  * `IP([version])` - check if the value is an IP (version 4 or 6).
@@ -158,9 +156,7 @@ We build on the excellent foundation of [chriso/validator.js](https://github.com
  * `lowercase()` - check if the value is lowercase.
  * `matches(pattern)` - check if string matches the pattern.
  * `mongoId()` - check if the value is a valid hex-encoded representation of a MongoDB ObjectId.
- * `multibyte()` - check if the value contains one or more multibyte chars.
  * `shorter(max)` - check if the value's length is less than an amount. Note: this function takes into account surrogate pairs.
- * `surrogatePair()` - check if the value contains any surrogate pairs chars.
  * `uppercase()` - check if the value is uppercase.
  * `URL([options])` - check if the value is an URL. options is an object which defaults to `{ protocols: ['http','https','ftp'], require_tld: true, require_protocol: false, allow_underscores: false, host_whitelist: false, host_blacklist: false }`.
  * `UUID([version])` - check if the value is a UUID (version 3, 4 or 5).
