@@ -119,52 +119,65 @@ It should either return a boolean indicating a success status **or** return a pr
 
 We build on the excellent foundation of [chriso/validator.js](https://github.com/chriso/validator.js) and define some of our own rules as well.
 
+##### Types
+ * `array()` - check if the value is an array.
+ * `boolean([value])` - Whether the value is a boolean. If a value is passed, we check that the boolean equals that value.
+ * `date()` - check if the value is a date.
+ * `float()` - check if the value is a float.
+ * `int()` - check if the value is an integer.
+ * `numeric()` - check if the value contains only numbers.
+ * `string()` - check that the value is a string.
+
+##### Dates
+
  * `after([date])` - check if the value is a date that's after the specified date (defaults to now).
+ * `before([date])` - check if the value is a date that's before the specified date.
+
+##### Strings
+
  * `alpha()` - check if the value contains only letters (a-zA-Z).
  * `alphanumeric()` - check if the value contains only letters and numbers.
  * `ascii()` - check if the value contains ASCII chars only.
- * `array()` - check if the value is an array.
  * `base64()` - check if a string is base64 encoded.
- * `before([date])` - check if the value is a date that's before the specified date.
- * `between(min, max)` - check if the value's length is within a range, exclusive. Note: this function takes into account surrogate pairs.
- * `boolean([value])` - Whether the value is a boolean. If a value is passed, we check that the boolean equals that value.
+ * `between(min, max)` - check if the value is a string with length within a range, exclusive. Note: this function takes into account surrogate pairs.
  * `byteLength(min [, max])` - check if the value's length (in bytes) falls in a range.
  * `contains(seed)` - check if the value contains the seed.
  * `creditCard()` - check if the value is a credit card.
- * `date()` - check if the value is a date.
- * `divisibleBy(number)` - check if the value is a number that's divisible by another.
  * `email()` - check if the value is an email.
- * `equals(, comparison)` - check if the value matches the comparison.
- * `float()` - check if the value is a float.
  * `FQDN([options])` - check if the value is a fully qualified domain name (e.g. domain.com). options is an object which defaults to { require_tld: true, allow_underscores: false }.
  * `fullWidth()` - check if the value contains any full-width chars.
  * `halfWidth()` - check if the value contains any half-width chars.
  * `hexadecimal()` - check if the value is a hexadecimal number.
  * `hexColor()` - check if the value is a hexadecimal color.
- * `in(values...)` - check if the value is in a array of allowed values. Warning: it's recommended to use array notation for this rule, unless all the values are strings and are not padded with spaces.
- * `int()` - check if the value is an integer.
  * `IP([version])` - check if the value is an IP (version 4 or 6).
  * `ISBN([version])` - check if the value is an ISBN (version 10 or 13).
  * `JSON()` - check if the value is valid JSON (note: uses JSON.parse).
  * `length(amt)` - check if the value's length equals an amount. Note: this function takes into account surrogate pairs.
  * `longer(min)` - check if the value's length is greater than an amount. Note: this function takes into account surrogate pairs.
- * `larger(min)` - check if the value is a number and is greater than an amount.
  * `lowercase()` - check if the value is lowercase.
  * `matches(pattern)` - check if string matches the pattern.
  * `mongoId()` - check if the value is a valid hex-encoded representation of a MongoDB ObjectId.
  * `multibyte()` - check if the value contains one or more multibyte chars.
- * `not(str...)` - inverts the given rule. for example: `[ 'not', 'length', 5 ]` will pass whenever the length is *not* 5
- * `numeric()` - check if the value contains only numbers.
- * **★** `required()` - check that the value is present (not null and not undefined). **if required is not passed, no validation rules will be run for values that aren't present**
- * `same(key)` - checks that the value strictly matches another under validation. example: `'password': ['same: password_confirmation']`
  * `shorter(max)` - check if the value's length is less than an amount. Note: this function takes into account surrogate pairs.
- * `smaller(max)` - check if the value is a number and is less than an amount.
  * `surrogatePair()` - check if the value contains any surrogate pairs chars.
  * `uppercase()` - check if the value is uppercase.
  * `URL([options])` - check if the value is an URL. options is an object which defaults to `{ protocols: ['http','https','ftp'], require_tld: true, require_protocol: false, allow_underscores: false, host_whitelist: false, host_blacklist: false }`.
  * `UUID([version])` - check if the value is a UUID (version 3, 4 or 5).
  * `variableWidth()` - check if the value contains a mixture of full and half-width chars.
+
+##### Numbers
+
+ * `divisibleBy(number)` - check if the value is a number that's divisible by another.
+ * `greaterThan(min)` - check if the value is a number and is greater than an amount
+ * `lessThan(max)` - check if the value is a number and is less than an amount.
  * `within(min, max)` - check if the value is a number within a range, exclusive.
+
+##### Generic
+
+ * `equals(comparison)` - check if the value matches the comparison. is capable of doing a deep comparison between objects/arrays, via [assert.deepEquals](http://nodejs.org/api/assert.html#assert_assert_deepequal_actual_expected_message)
+ * `in(values...)` - check if the value is in a array of allowed values. Warning: it's recommended to use array notation for this rule, unless all the values are strings and are not padded with spaces..
+ * `not(str...)` - inverts the given rule. for example: `[ 'not', 'length', 5 ]` will pass whenever the length is *not* 5
+ * **★** `required()` - check that the value is present (not null and not undefined). **if required is not passed, no validation rules will be run for values that aren't present**
 
 #### Language
 

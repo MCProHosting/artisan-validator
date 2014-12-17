@@ -29,4 +29,10 @@ describe('language', function () {
         language.set({ 'greet': 'Hello <%= who %>' });
         expect(language.resolve('greet', { who: 'World' })).toBe('Hello World');
     });
+
+    it('adds global variables', function () {
+        language.set({ 'greet': 'Hello <%= who %>' });
+        language.global('who', 'World');
+        expect(language.resolve('greet')).toBe('Hello World');
+    });
 });
