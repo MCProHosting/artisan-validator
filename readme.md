@@ -1,6 +1,7 @@
 # Artisan Validator
 
 [![Build Status](https://travis-ci.org/MCProHosting/artisan-validator.svg)](https://travis-ci.org/MCProHosting/artisan-validator)
+[![Code Climate](https://codeclimate.com/github/MCProHosting/artisan-validator/badges/gpa.svg)](https://codeclimate.com/github/MCProHosting/artisan-validator)
 
 A module for simple and fun validation in Node.js.
 
