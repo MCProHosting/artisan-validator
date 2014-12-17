@@ -12,6 +12,8 @@ First we have to "check out" a validator instance to use later. That's easy enou
 var validator = require('artisan-validator')();
 ```
 
+> Note: several processes involved in the instantiation of validators are synchronous. In your application, you'd want to create a single validator instance (to which you can add custom rules or language extensions) and reuse that throughout the system.
+
 #### Validating an Object
 
 **All validations are asynchronous** and return promises. Although there are not any built-in asynchonous validations, you may very well want to add a custom rule that, for examples, checks to make sure a value does not already exist in the database.
@@ -50,6 +52,8 @@ Rules are defined as an object with string keys that correspond to the expected 
     d: [[ 'between', 4, 6 ]]
 }
 ```
+
+> Note: when working with the string-based shorthand, we try to cast numbers correctly, but that's the only thing we do. If you need precise control your validator's input types, use the array notation.
 
 ##### Working with the Results object
 
@@ -136,12 +140,22 @@ Error messages are generated from language files. Currently we only have a Engli
 
 ```js
 validator.language.set(__dirname + '/klingon.json');
+// or, pass in directly
+validator.language.set({ 'required': 'Y U NO GIVE US <%= key %>' });
 ```
+
+> Note: care should be taken to use the escaped value syntax (`<%= something %>`) to prevent potential XSS.
 
 Or you can extend and overwrite it -- especially helpful when making custom rules.
 
 ```js
+// Update a single entry
 validator.language.extend('isFoo', '<%= key %>, which was <%= value %>, did not include <%= args[0] %> foos!');
+// Or multiple at once
+validator.language.extend({
+    'isFoo': '<%= key %>, which was <%= value %>, did not include <%= args[0] %> foos!',
+    'isBar': 'Need moar bar.'
+);
 ```
 
 The markup for languages, as you can see, is fairly simple, using [Lodash's template functionality](https://lodash.com/docs#template). You can also define "global" variables to be made accessible in these templates:
@@ -151,11 +165,11 @@ validator.language.global({ meaningOfLife: 42 });
 
 #### Running Validators Manually
 
-You can manually run validators on an object as well. They will (regardless of the underlying function) return a promise that is resolved to boolean true or false.
+You can manually run validators on an object as well. They will (regardless of the underlying function) return a promise that is resolved to boolean true or false. Note that this accepts only the verbose array notation, not the string notation.
 
 ```js
 validator.validators.run(
     { foo: 'foofoofoo' },
-    { foo: ['isFoo: 3']}
+    'foo', ['isFoo', 3]
 );
 ```

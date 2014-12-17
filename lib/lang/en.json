@@ -1,0 +1,3 @@
+{
+    "$missing": "The <%= key %> is invalid."
+}
