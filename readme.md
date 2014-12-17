@@ -36,7 +36,7 @@ var validator = require('artisan-validator')();
 
 #### Validating an Object
 
-**All validations are asynchronous** and return promises. Although there are not any built-in asynchonous validations, you may very well want to add a custom rule that, for examples, checks to make sure a value does not already exist in the database.
+All validations attempts return promises that are resolved to a results object. Although there are not any built-in asynchonous validations, you may very well want to add a custom rule that, for examples, checks to make sure a value does not already exist in the database.
 
 We use the `try(obj, rules)` method, which returns a promise that is always resolved to a Results object.
 
