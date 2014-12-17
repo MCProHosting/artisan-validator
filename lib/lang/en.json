@@ -41,5 +41,7 @@
     "in": "The <%= key %> be one of: <% args[0].join(', ').slice(0, -2) %>.",
     "not": "The <%= key %> is invalid.",
     "required": "The <%= key %> is required.",
+    "requiredWith": "The <%= key %> is required.",
+    "requiredWithout": "The <%= key %> is required.",
     "$missing": "The <%= key %> is invalid."
 }

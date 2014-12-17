@@ -55,7 +55,7 @@ validator.try(req.body, {
 }).then(function (result) {
     if (result.failed) {
         res.json(400, result.errors);
-        // -> {"username": ["Username be alphanumeric."]}
+        // -> {"username": ["The username should be alphanumeric."]}
     } else {
         res.json(200, "Your data is valid :)");
     }
