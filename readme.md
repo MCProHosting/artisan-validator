@@ -42,9 +42,9 @@ var validator = require('artisan-validator')();
 
 #### Validating an Object
 
-All validations attempts return promises that are resolved to a results object. Although there are not any built-in asynchonous validations, you may very well want to add a custom rule that, for examples, checks to make sure a value does not already exist in the database.
+All validations attempts return promises that are resolved to a results object. Although there are not any built-in asynchonous validations, you may very well want to add a [custom rule](#adding-custom-validators) that, for examples, checks to make sure a value does not already exist in the database.
 
-We use the `try(obj, rules)` method, which returns a promise that is always resolved to a Results object.
+We use the `try(obj, rules)` method, which returns a promise that is always resolved to a [Results object](#working-with-the-results-object).
 
 ```js
 validator.try(req.body, {
@@ -87,7 +87,7 @@ The results object will always define the following properties:
 
  * `passed: Boolean` True if the validation rules passed, false otherwise.
  * `failed: Boolean` True if the validation rules failed, false otherwise.
- * `errors: Object` An object where keys are properties that had rules which failed (that is, values that are OK will not be included) and values are an array of strings of error messages, according to the Language.
+ * `errors: Object` An object where keys are properties that had rules which failed (that is, values that are OK will not be included) and values are an array of strings of error messages, according to the [Language](#language).
 
 Additionally, we pass through the following lodash methods on the results  that can be used to work with the errors object: `keys`, `values`, `pairs`, `invert`, `pick`, `omit`, `forIn`, `has`.
 
@@ -186,11 +186,14 @@ We build on the excellent foundation of [chriso/validator.js](https://github.com
 
 #### Language
 
-Error messages are generated from language files. Currently we only have a English set, `en`. (although you can contribute translations!) You can load an entirely new set:
+Error messages are generated from language files. Currently we only have the following sets: `en` (default), `en-pr`. You can load one of these sets or an entirely new set:
 
 ```js
+// Load a built-in set:
+validator.language.builtIn('en-pr');
+// Or your own from a json file
 validator.language.set(__dirname + '/klingon.json');
-// or, pass in directly
+// alternate, pass in an object directly:
 validator.language.set({ 'required': 'Y U NO GIVE US <%= key %>' });
 ```
 
@@ -208,9 +211,18 @@ validator.language.extend({
 
 > Note: care should be taken to use the escaped value syntax (`<%= something %>`) to prevent potential XSS.
 
+Keys for language entries should match up with the corresponding rule, or be a `$missing` catch-all language. We make the following variables available in the template:
+
+ * `key` - Key of the value that has failed.
+ * `value` - The value that failed.
+ * `args` - Array of the arguments passed to the validator that failed.
+ * Any global variables (see below)
+
+
 The markup for languages, as you can see, is fairly simple, using [Lodash's template functionality](https://lodash.com/docs#template). You can also define "global" variables to be made accessible in these templates:
+
 ```js
-validator.language.global({ meaningOfLife: 42 });
+validator.language.global('meaningOfLife', 42);
 ```
 
 #### Running Validators Manually

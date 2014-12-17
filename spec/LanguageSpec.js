@@ -35,4 +35,9 @@ describe('language', function () {
         language.global('who', 'World');
         expect(language.resolve('greet')).toBe('Hello World');
     });
+
+    it('loads built-in sets', function () {
+        language.builtIn('en-pr');
+        expect(language.dictionary.array).toBe('Arr! The <%= key %> ain\'t an array.');
+    });
 });
