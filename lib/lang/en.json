@@ -29,7 +29,6 @@
     "matches": "The <%= key %> is in the wrong format.",
     "mongoId": "The <%= key %> must be a valid ID.",
     "shorter": "The <%= key %> must be shorter than <%= args[0] %> characters.",
-    "shorter": "The <%= key %> must be shorter than <%= args[0] %> characters.",
     "uppercase": "The <%= key %> must be uppercase.",
     "URL": "The <%= key %> must be a valid URL.",
     "UUID": "The <%= key %> is not a valid UUID<%= args[0] || '' %>.",
