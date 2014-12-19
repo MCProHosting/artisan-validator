@@ -25,7 +25,7 @@
     "JSON": "The <%= key %> must be valid JSON.",
     "length": "The <%= key %> must be <%= args[0] %> characters long.",
     "longer": "The <%= key %> must be more than <%= args[0] %> characters long.",
-    "lowercase": "The <%= key %> must lowercase.",
+    "lowercase": "The <%= key %> must be lowercase.",
     "matches": "The <%= key %> is in the wrong format.",
     "mongoId": "The <%= key %> must be a valid ID.",
     "shorter": "The <%= key %> must be shorter than <%= args[0] %> characters.",
