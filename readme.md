@@ -186,7 +186,7 @@ We build on the excellent foundation of [chriso/validator.js](https://github.com
 
 #### Language
 
-Error messages are generated from language files. Currently we only have the following sets: `en` (default), `en-pr`. You can load one of these sets or an entirely new set:
+Error messages are generated from language files. Currently we only have the following sets: `en` (default), `en-pr`, `de`. You can load one of these sets or an entirely new set:
 
 ```js
 // Load a built-in set:
