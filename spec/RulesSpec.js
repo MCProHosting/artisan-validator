@@ -134,7 +134,7 @@ describe('validations', function () {
         it('checks', function () {
             expect(fn(null, 'hi', 3, 6)).toBe(false);
             expect(fn(null, {}, 3, 6)).toBe(false);
-            expect(fn(null, 3, 3, 6)).toBe(false);
+            expect(fn(null, 2, 3, 6)).toBe(false);
             expect(fn(null, 5, 3, 6)).toBe(true);
             expect(fn(null, 9, 4)).toBe(false);
         });
@@ -174,8 +174,8 @@ describe('validations', function () {
         var fn = require('../lib/rules/in');
 
         it('checks', function () {
-            expect(fn(null, 'a', ['b', 'c', 'd'])).toBe(false);
-            expect(fn(null, 'b', ['b', 'c', 'd'])).toBe(true);
+            expect(fn(null, 'a', 'b', 'c', 'd')).toBe(false);
+            expect(fn(null, 'b', 'b', 'c', 'd')).toBe(true);
         });
     });
 

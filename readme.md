@@ -182,7 +182,7 @@ We build on the excellent foundation of [chriso/validator.js](https://github.com
  * `divisibleBy(number)` - check if the value is a number that's divisible by another.
  * `greaterThan(min)` - check if the value is a number and is greater than an amount
  * `lessThan(max)` - check if the value is a number and is less than an amount.
- * `within(min, max)` - check if the value is a number within a range, exclusive.
+ * `within(min, max)` - check if the value is a number within a range, inclusive.
 
 #### Language
 

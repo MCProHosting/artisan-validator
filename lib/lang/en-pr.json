@@ -38,7 +38,7 @@
     "lessThan": "Arr! The <%= key %> ain't less than <%= args[0] %>!",
     "within": "Arr! The <%= key %> ain't greater than <%= args[0] %> and less than <%= args[1] %>!",
     "equals": "Arr! The <%= key %> ain't matchin' <%= args[0] %>.",
-    "in": "Arr! The <%= key %> be one of: <% args.join(', ').slice(0, -2) %>.",
+    "in": "Arr! The <%= key %> be one of: <%= args.join(', ') %>.",
     "not": "Arr! The <%= key %> be invalid!",
     "required": "Arr! The <%= key %> be required.",
     "requiredWith": "Arr! The <%= key %> be required.",

@@ -37,7 +37,7 @@
     "lessThan": "The <%= key %> should be less than <%= args[0] %>.",
     "within": "The <%= key %> should be greater than <%= args[0] %> and less than <%= args[1] %>.",
     "equals": "The <%= key %> must match <%= args[0] %>.",
-    "in": "The <%= key %> must be one of: <% args.join(', ').slice(0, -2) %>.",
+    "in": "The <%= key %> must be one of: <%= args.join(', ') %>.",
     "not": "The <%= key %> is invalid.",
     "required": "The <%= key %> is required.",
     "requiredWith": "The <%= key %> is required.",
