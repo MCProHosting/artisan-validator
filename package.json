@@ -4,7 +4,7 @@
   "description": "Fun and friendly data validation.",
   "main": "index.js",
   "scripts": {
-    "test": "node node_modules/jasmine-node/bin/jasmine-node spec"
+    "test": "node node_modules/jasmine-node/bin/jasmine-node spec && node node_modules/jshint/bin/jshint lib"
   },
   "repository": {
     "type": "git",
@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/MCProHosting/artisan-validator",
   "devDependencies": {
-    "jasmine-node": "~2.0.0"
+    "jasmine-node": "~2.0.0",
+    "jshint": "^2.5.11"
   },
   "dependencies": {
     "bluebird": "~2.3.11",
