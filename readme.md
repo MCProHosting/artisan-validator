@@ -157,6 +157,7 @@ We build on the excellent foundation of [chriso/validator.js](https://github.com
  * `base64()` - check if a string is base64 encoded.
  * `between(min, max)` - check if the value is a string with length within a range, exclusive. Note: this function takes into account surrogate pairs.
  * `byteLength(min [, max])` - check if the value's length (in bytes) falls in a range.
+ * `camelCase()` - check if the value is camelCase (alphanumeric, first letter is lowercase).
  * `contains(seed)` - check if the value contains the seed.
  * `creditCard()` - check if the value is a credit card.
  * `email()` - check if the value is an email.
@@ -172,6 +173,8 @@ We build on the excellent foundation of [chriso/validator.js](https://github.com
  * `matches(pattern)` - check if string matches the pattern.
  * `mongoId()` - check if the value is a valid hex-encoded representation of a MongoDB ObjectId.
  * `shorter(max)` - check if the value's length is less than an amount. Note: this function takes into account surrogate pairs.
+ * `snakeCase()` - check if the value is snake_case (alphanumeric with underscores, all lower case).
+ * `studlyCase()` - check if the value is StudlyCase (alphanumeric, first letter uppercase).
  * `uppercase()` - check if the value is uppercase.
  * `URL([options])` - check if the value is an URL. options is an object which defaults to `{ protocols: ['http','https','ftp'], require_tld: true, require_protocol: false, allow_underscores: false, host_whitelist: false, host_blacklist: false }`.
  * `UUID([version])` - check if the value is a UUID (version 3, 4 or 5).

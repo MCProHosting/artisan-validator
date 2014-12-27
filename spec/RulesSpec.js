@@ -188,4 +188,40 @@ describe('validations', function () {
             expect(fn(null, [])).toBe(false);
         });
     });
+
+    describe('cases', function () {
+        var snake = require('../lib/rules/snakeCase');
+        var studly = require('../lib/rules/studlyCase');
+        var camel = require('../lib/rules/camelCase');
+
+        it('snakes', function () {
+            expect(snake(null, 'hello')).toBe(true);
+            expect(snake(null, 'hello_world')).toBe(true);
+            expect(snake(null, 'hello_world!')).toBe(false);
+            expect(snake(null, 'helloWorld')).toBe(false);
+            expect(snake(null, 'helloWorld!')).toBe(false);
+            expect(snake(null, 'HelloWorld')).toBe(false);
+            expect(snake(null, 'HelloWorld!')).toBe(false);
+        });
+
+        it('studlys', function () {
+            expect(studly(null, 'hello')).toBe(false);
+            expect(studly(null, 'hello_world')).toBe(false);
+            expect(studly(null, 'hello_world!')).toBe(false);
+            expect(studly(null, 'helloWorld')).toBe(false);
+            expect(studly(null, 'helloWorld!')).toBe(false);
+            expect(studly(null, 'HelloWorld')).toBe(true);
+            expect(studly(null, 'HelloWorld!')).toBe(false);
+        });
+
+        it('camels', function () {
+            expect(camel(null, 'hello')).toBe(true);
+            expect(camel(null, 'hello_world')).toBe(false);
+            expect(camel(null, 'hello_world!')).toBe(false);
+            expect(camel(null, 'helloWorld')).toBe(true);
+            expect(camel(null, 'helloWorld!')).toBe(false);
+            expect(camel(null, 'HelloWorld')).toBe(false);
+            expect(camel(null, 'HelloWorld!')).toBe(false);
+        });
+    });
 });
