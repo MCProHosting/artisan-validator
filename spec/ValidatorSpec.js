@@ -13,6 +13,17 @@ describe('the main validator', function () {
         expect(rules).toEqual({ a: [['foo', 1, 2, 'a: b', true]], b: [['required'], ['foo', 1, '2']]});
     });
 
+    it('should not modify the rules object', function (done) {
+        var data = { foo: 'bar' };
+        var rules = { foo: ['required']};
+        spyOn(validator.validators, 'run').and.returnValue(Bluebird.resolve(true));
+
+        validator.try(data, rules).then(function (result) {
+            expect(rules).toEqual({ foo: ['required']});
+            done();
+        });
+    });
+
     describe('extractRequired', function () {
 
         it('should work with required', function () {
