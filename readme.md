@@ -128,7 +128,7 @@ We build on the excellent foundation of [chriso/validator.js](https://github.com
 
 ##### Generic
 
- * `equals(comparison)` - check if the value matches the comparison. is capable of doing a deep comparison between objects/arrays, via [assert.deepEquals](http://nodejs.org/api/assert.html#assert_assert_deepequal_actual_expected_message)
+ * `equal(comparison)` - check if the value matches the comparison. is capable of doing a deep comparison between objects/arrays, via [assert.deepEquals](http://nodejs.org/api/assert.html#assert_assert_deepequal_actual_expected_message)
  * `in(values...)` - check if the value is in a array of allowed values. Warning: it's recommended to use array notation for this rule, unless all the values are strings and are not padded with spaces..
  * `not(str...)` - inverts the given rule. for example: `[ 'not', 'length', 5 ]` will pass whenever the length is *not* 5
  * **★** `required()` - check that the value is present (not null and not undefined). **if required is not passed, no validation rules will be run for values that aren't present**
