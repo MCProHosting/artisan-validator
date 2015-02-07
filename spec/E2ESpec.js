@@ -12,6 +12,50 @@ describe('everythang', function () {
         };
     });
 
+    describe('tryOrFail', function () {
+        it('passes', function (done) {
+            validator.tryOrFail({
+                username: 'brendanashworth',
+                password: 'secret',
+                acceptTOS: true
+            }, rules).then(function(result) {
+                expect(result.name).toBe(undefined);
+
+                expect(result.passed).toBe(true);
+                expect(result.failed).toBe(false);
+                expect(result.errors).toEqual({});
+
+                done();
+            }).catch(function(err) {
+                this.fail();
+
+                done();
+            });
+        });
+
+        it('fails', function (done) {
+            validator.tryOrFail({
+                username: 'brendanashworth',
+                acceptTOS: false
+            }, rules).then(function(result) {
+                this.fail();
+
+                done();
+            }).catch(function(err) {
+                expect(err.name).toEqual('ValidationError');
+
+                expect(err.passed).toBe(false);
+                expect(err.failed).toBe(true);
+                expect(err.errors).toEqual({
+                    password: [ 'The password is required.' ],
+                    acceptTOS: [ 'The acceptTOS must be a boolean.' ]
+                });
+
+                done();
+            });
+        })
+    });
+
     it('passses', function (done) {
         validator.try({
             username: 'connor4312',
