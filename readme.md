@@ -149,6 +149,11 @@ We build on the excellent foundation of [chriso/validator.js](https://github.com
  * `after([date])` - check if the value is a date that's after the specified date (defaults to now).
  * `before([date])` - check if the value is a date that's before the specified date.
 
+##### Arrays
+
+ * `longer(min)` - check if the value's length is greater than an amount.
+ * `shorter(max)` - check if the value's length is less than an amount.
+
 ##### Strings
 
  * `alpha()` - check if the value contains only letters (a-zA-Z).
