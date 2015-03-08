@@ -12,7 +12,7 @@
     "alphanumeric": "The <%= key %> must be alphanumeric.",
     "ascii": "The <%= key %> may only contain ascii characters.",
     "base64": "The <%= key %> must be base64 encoded.",
-    "between": "The <%= key %> must be <%= args[0] %> and <%= args[1] %> characters long.",
+    "between": "The <%= key %> must be between <%= args[0] %> and <%= args[1] %> characters long.",
     "byteLength": "The <%= key %> must be <%= args[0] %> and <%= args[1] %> bytes long.",
     "contains": "The <%= key %> must contain <%= args[0] %>.",
     "creditCard": "The <%= key %> is not a valid credit card number.",
