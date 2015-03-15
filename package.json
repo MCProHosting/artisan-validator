@@ -1,6 +1,6 @@
 {
   "name": "artisan-validator",
-  "version": "1.0.2",
+  "version": "1.1.2",
   "description": "Fun and friendly data validation.",
   "main": "index.js",
   "scripts": {
